@@ -84,6 +84,34 @@ std::string transformToSHA1(std::string_view input) {
 		throw std::runtime_error("Message digest finalization failed");
 	}
 
+	return digest;
+}
+
+std::string transformToSHA1Hex(std::string_view input) {
+	const EVP_MD* md = EVP_sha1();
+	if (!md) {
+		throw std::runtime_error("SHA1 not available");
+	}
+
+	std::unique_ptr<EVP_MD_CTX, void(*)(EVP_MD_CTX*)> ctx(EVP_MD_CTX_new(), EVP_MD_CTX_free);
+	if (!ctx) {
+		throw std::runtime_error("Message digest context creation failed");
+	}
+
+	if (!EVP_DigestInit_ex(ctx.get(), md, nullptr)) {
+		throw std::runtime_error("Message digest initialization failed");
+	}
+
+	if (!EVP_DigestUpdate(ctx.get(), input.data(), input.size())) {
+		throw std::runtime_error("Message digest update failed");
+	}
+
+	unsigned int len = EVP_MD_size(md);
+	std::string digest(static_cast<size_t>(len), '\0');
+	if (!EVP_DigestFinal_ex(ctx.get(), reinterpret_cast<unsigned char*>(digest.data()), &len)) {
+		throw std::runtime_error("Message digest finalization failed");
+	}
+
 	// Convert binary digest to lowercase hex string
 	static const char* hex = "0123456789abcdef";
 	std::string hexDigest;

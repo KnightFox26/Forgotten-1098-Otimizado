@@ -14,6 +14,7 @@ void printXMLError(const std::string& where, const std::string& fileName, const 
 #include <pugixml.hpp>
 
 std::string transformToSHA1(std::string_view input);
+std::string transformToSHA1Hex(std::string_view input);
 std::string generateToken(const std::string& key, uint32_t ticks);
 
 // checks that str1 is equivalent to str2 ignoring letter case
