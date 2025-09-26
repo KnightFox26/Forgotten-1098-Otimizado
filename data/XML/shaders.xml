@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<shaders>
+	<shader id="1" name="outfit_rainbow" />
+	<shader id="2" name="outfit_default" />
+</shaders>
+

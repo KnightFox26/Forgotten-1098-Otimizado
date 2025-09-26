@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wingsauras>
+    
+        <wing id="934" name="Angel Wings"/>
+        <aura id="934" name="Fire Aura"/>
+    
+
+    <!-- Wings -->
+    <!-- <wing id="600" name="Angel Wings"/> -->
+
+    <!-- Auras -->
+    <!-- <aura id="700" name="Fire Aura"/> -->
+</wingsauras>
+
